@@ -16,8 +16,12 @@ public class LoginScreen extends JFrame implements ActionListener {
 
     public LoginScreen() {
         setTitle("Login");
+        ImageIcon img;
+        img = new ImageIcon("data/sehwag.jpg");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setBounds(200,200,400,600);
+        setIconImage(img.getImage());
 
         // Create username label and field
         JLabel usernameLabel = new JLabel("Username: ");
@@ -32,15 +36,19 @@ public class LoginScreen extends JFrame implements ActionListener {
         submitButton.addActionListener(this);
 
         // Create panel and add components
-        JPanel panel = new JPanel(new GridLayout(3, 2));
+        JPanel pan = new JPanel(new GridLayout(2, 2));
+        JPanel panel = new JPanel(new GridLayout(5, 2));
+        panel.setBounds(200,200,400,600);
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
         panel.add(passwordField);
         panel.add(submitButton);
+       pan.add(panel);
 
         // Add panel to frame
-        getContentPane().add(panel);
+     //   getContentPane().add(panel);
+        getContentPane().add(pan);
 
         pack();
         setVisible(true);
