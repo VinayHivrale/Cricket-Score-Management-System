@@ -30,6 +30,7 @@ public class ScorekeeperLoginForm extends JFrame {
                     return;
                 }
 
+
                 // check if the credentials are valid
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/cricket", "root", "Root@24680");

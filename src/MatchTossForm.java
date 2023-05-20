@@ -84,9 +84,9 @@ public class MatchTossForm extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Assuming you have a JComboBox named tossWinnerComboBox
+                 // Assuming you have a JComboBox named tossWinnerComboBox
                 String selectedWinner = (String) tossWinnerComboBox.getSelectedItem();
-// Assuming you have a JComboBox named tossDecisionComboBox
+                 // Assuming you have a JComboBox named tossDecisionComboBox
                 String selectedDecision = (String) tossDecisionComboBox.getSelectedItem();
 
                // new Scoreboard(1);
@@ -97,11 +97,7 @@ public class MatchTossForm extends JFrame {
 
         infoPanel.add(inputPanel);
         infoPanel.add(submitButton);
-
         add(infoPanel, BorderLayout.CENTER);
-
-
-
         pack();
         setVisible(true);
     }
@@ -110,7 +106,7 @@ public class MatchTossForm extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MatchTossForm(123, 1, 2, "Team 1", "Team 2", "2023-05-19", "10:00 AM", 20);
+                new MatchTossForm(123, 1, 2, "Team 1", "Team 2", "2023-05-19", "10:00 AM", 2);
             }
         });
     }
