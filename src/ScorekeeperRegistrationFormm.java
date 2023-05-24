@@ -55,7 +55,7 @@ public class ScorekeeperRegistrationFormm extends JFrame {
         });
 
         // create panel and add components
-        JPanel panel = new JPanel(new GridLayout(5, 2));
+        JPanel panel = new JPanel(new GridLayout(6, 2));
         panel.add(nameLabel);
         panel.add(nameField);
         panel.add(ageLabel);

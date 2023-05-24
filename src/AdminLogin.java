@@ -10,7 +10,7 @@ public class AdminLogin {
     private JPasswordField passwordField;
     private JFrame frame;
 
-    public AdminLogin() {
+    public AdminLogin(int p) {
         // Setting Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -59,9 +59,21 @@ public class AdminLogin {
 
                     if (rs.next()) {
                         //JOptionPane.showMessageDialog(null, "Login successful");
-
-                        new AdminWindow();
+                        if(p==0)
+                        {  new AdminWindow();
                         frame.dispose(); // close login window
+                             }
+                        else if(p==1)
+                        {
+                            new ScorekeeperRegistrationFormm();
+                            frame.dispose();
+
+                        }
+                        else
+                        {
+                            new AdminRegistrationForm();
+                            frame.dispose();
+;                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     }

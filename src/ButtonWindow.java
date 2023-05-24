@@ -3,6 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class ButtonWindow extends JFrame {
 
@@ -30,7 +31,7 @@ public class ButtonWindow extends JFrame {
 
         // Create the buttons
         JButton createAdminButton = new JButton("Create Admin Account");
-        JButton createScorekeeperButton = new JButton("Create Scorekeeper");
+        JButton createScorekeeperButton = new JButton("Create Scorekeeper Account");
         JButton adminLoginButton = new JButton("Login for Admin");
         JButton scorekeeperLoginButton = new JButton("Login for Scorekeeper");
 
@@ -71,21 +72,25 @@ public class ButtonWindow extends JFrame {
         adminLoginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AdminLogin();
+                new AdminLogin(0);
             }
         });
 
         createAdminButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AdminRegistrationForm();
+                if(getAdminCredCount()==0)
+                    new AdminRegistrationForm();
+                else
+                  new AdminLogin(2);
             }
         });
 
         createScorekeeperButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new ScorekeeperRegistrationFormm();
+                new AdminLogin(1);
+
             }
         });
 
@@ -126,6 +131,31 @@ public class ButtonWindow extends JFrame {
                 buttonWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         });
+    }
+
+
+    private static final String url = "jdbc:mysql://localhost:3306/cricket";
+    private static final String username = "root";
+    private static final String password = "Root@24680";
+
+    public static int getAdminCredCount() {
+        // SQL query to count rows in the table
+        String query = "SELECT COUNT(*) AS row_count FROM admin_cred";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            if (resultSet.next()) {
+                return resultSet.getInt("row_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Return 0 if an exception occurred or no result was found
+        return 0;
     }
 }
 

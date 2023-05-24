@@ -64,6 +64,11 @@ public class AdminRegistrationForm extends JFrame {
                     stmt.executeUpdate();
                     conn.close();
                     JOptionPane.showMessageDialog(null, "Registration successful");
+                    ButtonWindow buttonWindow = new ButtonWindow();
+                    buttonWindow.setVisible(true);
+                    buttonWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    dispose();
+
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }

@@ -58,7 +58,7 @@ public class AdminWindow extends JFrame {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AdminLogin();
+                new AdminLogin(1);
             }
         });
 
