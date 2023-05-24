@@ -17,9 +17,9 @@ public class MatchTossForm extends JFrame {
 
         Font comicSansFont = new Font("Comic Sans MS", Font.PLAIN, 25);
 
-        JPanel infoPanel = new JPanel(new GridLayout(3, 3,20,20));
+        JPanel infoPanel = new JPanel(new GridLayout(3, 3, 20, 20));
 
-        JPanel inputPanel = new JPanel(new GridLayout(2,1,20,20));
+        JPanel inputPanel = new JPanel(new GridLayout(2, 1, 20, 20));
 
         JLabel matchIdLabel = new JLabel("Match ID: " + matchId);
         JLabel team1Label = new JLabel("Team 1: " + team1Name);
@@ -73,6 +73,7 @@ public class MatchTossForm extends JFrame {
         inputPanel.add(tossDecisionComboBox);
 
         JButton submitButton = new JButton("Submit");
+        JButton backButton = new JButton("Back");
 
         submitButton.setBackground(Color.GREEN);  // Set background color to green
         submitButton.setForeground(Color.WHITE);  // Set text color to white
@@ -81,22 +82,37 @@ public class MatchTossForm extends JFrame {
         submitButton.setFocusPainted(false);  // Remove focus ring
         submitButton.setOpaque(true);  // Enable background color to be visible
         submitButton.setBorder(border);
+
+        backButton.setBackground(Color.RED);  // Set background color to red
+        backButton.setForeground(Color.WHITE);  // Set text color to white
+        backButton.setFont(comicSansFont);  // Set font to Comic Sans MS
+        backButton.setBorderPainted(false);  // Remove border
+        backButton.setFocusPainted(false);  // Remove focus ring
+        backButton.setOpaque(true);  // Enable background color to be visible
+        backButton.setBorder(border);
+
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 // Assuming you have a JComboBox named tossWinnerComboBox
                 String selectedWinner = (String) tossWinnerComboBox.getSelectedItem();
-                 // Assuming you have a JComboBox named tossDecisionComboBox
                 String selectedDecision = (String) tossDecisionComboBox.getSelectedItem();
 
-               // new Scoreboard(1);
-                new Scoreboard(matchId,team1Id,team2Id,team1Name,  team2Name,date,time,overs,selectedWinner, selectedDecision);
+                new Scoreboard(matchId, team1Id, team2Id, team1Name, team2Name, date, time, overs, selectedWinner, selectedDecision);
+                dispose();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MatchSearchApp app = new MatchSearchApp();
                 dispose();
             }
         });
 
         infoPanel.add(inputPanel);
         infoPanel.add(submitButton);
+        infoPanel.add(backButton);
         add(infoPanel, BorderLayout.CENTER);
         pack();
         setVisible(true);

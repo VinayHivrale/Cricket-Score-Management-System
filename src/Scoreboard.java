@@ -72,7 +72,7 @@ public class Scoreboard extends JFrame {
 
         // Create labels for team name, 1st inning score, total runs-wickets, and current over
 
-        if((selectedWinner == team1Name) && selectedDecision == "bat")
+        if((selectedWinner == team1Name) && selectedDecision == "Bat")
         {
              firstInningScoreLabel.setText(team1Name+",1st Inning:");
         }

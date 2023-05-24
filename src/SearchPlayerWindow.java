@@ -10,14 +10,17 @@ public class SearchPlayerWindow extends JFrame {
 
     public SearchPlayerWindow() {
         super("Search Player");
-
+        Font comicSans = new Font("Comic Sans MS", Font.PLAIN, 16);
         // create search labels and text fields
         JLabel searchLabel = new JLabel("Search Player by Player ID or Name:");
         searchField = new JTextField(20);
+        searchLabel.setFont(comicSans);
+        searchField.setFont(comicSans);
 
-        JLabel searchTeamLabel = new JLabel("Search Player by Team ID or Team Name:");
+        JLabel searchTeamLabel = new JLabel("Search Player by Team ID:");
         searchTeamField = new JTextField(20);
-
+        searchTeamLabel.setFont(comicSans);
+        searchTeamField.setFont(comicSans);
         // create search button
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(new ActionListener() {
@@ -106,7 +109,7 @@ public class SearchPlayerWindow extends JFrame {
         resultArea.setEditable(false);
         resultArea.setForeground(new Color(242, 242, 2, 255));
         resultArea.setBackground(new Color(42, 41, 41));
-        Font comicSans = new Font("Comic Sans MS", Font.PLAIN, 16);
+
         resultArea.setFont(comicSans);
 
         // create panel and add components
@@ -118,7 +121,7 @@ public class SearchPlayerWindow extends JFrame {
         panel.add(searchButton);
         panel.add(clearButton);
         panel.add(new JScrollPane(resultArea));
-
+        panel.setBackground(new Color(242, 242, 2));
 
         // set window properties
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

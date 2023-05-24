@@ -15,11 +15,11 @@ public class AdminWindow extends JFrame {
             }
         });
 
-        JButton createTournamentButton = createStyledButton("Create Tournament");
-        createTournamentButton.addActionListener(new ActionListener() {
+        JButton searchMatchButton = createStyledButton("Search Match");
+     searchMatchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Create Tournament button clicked");
-            }
+                setVisible(false);
+                new AdminSearchMatch();}
         });
 
         JButton createMatchButton = createStyledButton("Create Match");
@@ -47,8 +47,11 @@ public class AdminWindow extends JFrame {
 
         JButton searchTeamButton = createStyledButton("Search Team");
         searchTeamButton.addActionListener(new ActionListener() {
+
+
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Search Team button clicked");
+                SearchTeamWindow searchTeamWindow=new SearchTeamWindow();
+                setVisible(false);
             }
         });
 
@@ -57,27 +60,38 @@ public class AdminWindow extends JFrame {
         backButton.setForeground(new Color(255, 255, 255));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+               // setVisible(false);
                 new AdminLogin(1);
+                setVisible(false);
+            }
+        });
+        JButton selectmatchplayers = createStyledButton("Select players for match");
+        selectmatchplayers.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new SelectPlayersWindow();
             }
         });
 
-        // create panel and add components
-        JPanel panel = new JPanel(new GridLayout(7, 1, 10, 10));
+
+        JPanel panel = new JPanel(new GridLayout(8, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(new Color(37, 37, 5));
         panel.add(addPlayerButton);
-        panel.add(createTournamentButton);
         panel.add(createMatchButton);
         panel.add(addTeamButton);
         panel.add(searchPlayerButton);
         panel.add(searchTeamButton);
+        panel.add(searchMatchButton);
+        panel.add(selectmatchplayers);
         panel.add(backButton);
 
-        // add panel to frame
+
+
+
         add(panel);
 
-        // set frame properties
+
         setSize(500, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

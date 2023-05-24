@@ -1,11 +1,12 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
 public class ScorekeeperLoginForm extends JFrame {
     private JTextField usernameField, passwordField;
-    private JButton loginButton;
+    private JButton loginButton, backButton; // Declare backButton as an instance variable
 
     public ScorekeeperLoginForm() {
         super("Scorekeeper Login Form");
@@ -30,7 +31,6 @@ public class ScorekeeperLoginForm extends JFrame {
                     return;
                 }
 
-
                 // check if the credentials are valid
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/cricket", "root", "Root@24680");
@@ -45,7 +45,6 @@ public class ScorekeeperLoginForm extends JFrame {
                         MatchSearchApp app = new MatchSearchApp();
                         app.setVisible(true);
                         dispose();
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     }
@@ -57,13 +56,29 @@ public class ScorekeeperLoginForm extends JFrame {
             }
         });
 
+        // create back button
+        backButton = new JButton("Back");
+        backButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+        backButton.setForeground(Color.WHITE);
+        backButton.setBackground(new Color(2, 10, 15));
+        backButton.setBorder(new LineBorder(new Color(42, 41, 41), 2));
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // close login window
+                ButtonWindow buttonWindow = new ButtonWindow();
+                buttonWindow.setVisible(true);
+                buttonWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                dispose();
+            }
+        });
+
         // create panel and add components
         JPanel panel = new JPanel(new GridLayout(3, 2));
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(new JLabel()); // empty label for spacing
+        panel.add(backButton); // Add backButton to the panel
         panel.add(loginButton);
 
         // add panel to frame

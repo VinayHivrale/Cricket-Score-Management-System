@@ -9,6 +9,7 @@ public class MatchSearchApp extends JFrame {
     private JTextField dateField;
     private JButton searchButton;
     private JButton clearButton;
+    private JButton backButton; // New back button
     private JPanel buttonPanel;
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/cricket";
@@ -29,6 +30,7 @@ public class MatchSearchApp extends JFrame {
         dateField = new JTextField(10);
         searchButton = new JButton("Search");
         clearButton = new JButton("Clear");
+        backButton = new JButton("Back"); // Initialize back button
 
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -50,10 +52,19 @@ public class MatchSearchApp extends JFrame {
             }
         });
 
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ScorekeeperLoginForm(); // Create a new instance of ScorekeeperLoginForm
+                dispose(); // Close the current frame
+            }
+        });
+
         add(dateLabel);
         add(dateField);
         add(searchButton);
         add(clearButton);
+        add(backButton); // Add back button
         add(scrollPane);
     }
 
@@ -87,8 +98,6 @@ public class MatchSearchApp extends JFrame {
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-
                         new MatchTossForm(matchId, team1Id, team2Id, team1, team2, matchDate, matchTime, overs);
                         dispose();
                     }
@@ -103,9 +112,7 @@ public class MatchSearchApp extends JFrame {
             JOptionPane.showMessageDialog(this, "Error retrieving matches: " + ex.getMessage());
         }
 
-
-
-    revalidate();
+        revalidate();
         repaint();
     }
 
@@ -121,8 +128,7 @@ public class MatchSearchApp extends JFrame {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             String query = "SELECT team_name FROM `cricket_team` WHERE team_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
-                    pstmt.setInt(1, teamId);
+            pstmt.setInt(1, teamId);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -139,12 +145,12 @@ public class MatchSearchApp extends JFrame {
     }
 
     public static void main(String[] args) {
-
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 MatchSearchApp app = new MatchSearchApp();
